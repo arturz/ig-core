@@ -1,1 +1,0 @@
-{"version":3,"file":"createDataDir.js","sourceRoot":"","sources":["../../../src/accounts/utils/createDataDir.ts"],"names":[],"mappings":";;;;;AAAA,oDAA2B;AAC3B,8DAAqC;AAErC,kBAAe,KAAK,EAAE,SAAiB,EAAE,EAAE;IACzC,MAAM,OAAO,GAAG,oBAAU,CAAC,SAAS,CAAC,CAAA;IACrC,MAAM,gBAAM,CAAC,OAAO,CAAC,CAAA;IACrB,OAAO,OAAO,CAAA;AAChB,CAAC,CAAA"}

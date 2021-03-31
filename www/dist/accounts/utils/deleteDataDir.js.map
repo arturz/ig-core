@@ -1,1 +1,0 @@
-{"version":3,"file":"deleteDataDir.js","sourceRoot":"","sources":["../../../src/accounts/utils/deleteDataDir.ts"],"names":[],"mappings":";;;;;AAAA,oDAA2B;AAC3B,8DAAqC;AAErC,kBAAe,CAAC,SAAiB,EAAE,EAAE;IACnC,OAAO,IAAI,OAAO,CAAC,OAAO,CAAC,EAAE;QAC3B,MAAM,OAAO,GAAG,oBAAU,CAAC,SAAS,CAAC,CAAA;QACrC,gBAAM,CAAC,OAAO,EAAE,OAAO,CAAC,CAAA;IAC1B,CAAC,CAAC,CAAA;AACJ,CAAC,CAAA"}

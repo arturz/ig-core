@@ -1,5 +1,4 @@
 node_modules/
-build/
 data/
-accounts_data/
-.env
+dist/
+chrome/
