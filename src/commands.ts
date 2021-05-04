@@ -158,5 +158,5 @@ export const runCommand = (page: Page, name: string, ...args: any[]) => {
 
   if (!command) throw `There is no command ${name}`;
 
-  return command?.fn(...args);
+  return command.fn(...args);
 };
