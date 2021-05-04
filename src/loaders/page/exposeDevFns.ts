@@ -1,13 +1,12 @@
-import { Page } from 'puppeteer'
-import { getSupervisors } from '../../supervisors'
+import { Page } from "puppeteer";
+import { getAllCommands } from "../../commands";
 
 export default async (page: Page) => {
-  const supervisors = getSupervisors(page)
+  const commands = getAllCommands(page);
 
   await Promise.all(
-    Object.entries(supervisors)
-    .map(async ([ fnName, fn ]) => {
-      page.exposeFunction(fnName, fn)
+    commands.map(async ({ name, fn }) => {
+      return page.exposeFunction(name, fn);
     })
-  )
-}
+  );
+};
