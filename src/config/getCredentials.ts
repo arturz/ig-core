@@ -1,9 +1,10 @@
-import getEnvData from './getEnvData'
+import getEnvData from "./getEnvData";
 
 export default () => {
-  const { login, password } = getEnvData()
+  const { login, password } = getEnvData();
+
   return {
     login,
-    password
-  }
-}
+    password,
+  };
+};

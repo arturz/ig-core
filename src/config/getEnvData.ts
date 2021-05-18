@@ -1,26 +1,33 @@
-import { resolve } from 'path'
+import { resolve } from "path";
 
-const login = process.env.LOGIN || 'arturz__'
+const login = process.env.LOGIN || "";
 
-const password = process.env.PASSWORD || ''
+const password = process.env.PASSWORD || "";
 
-const controlled = process.env.CONTROLLED === '1'
+const screenshotDelay = process.env.SCREENSHOT_DELAY
+  ? parseInt(process.env.SCREENSHOT_DELAY)
+  : 100;
 
-const headless = process.env.HEADLESS === '1'
+//if (!login) throw `No instagram login provided (LOGIN env)`;
+//if (!password) throw `No instagram password provided (PASSWORD env)`;
 
-const production = process.env.NODE_ENV === 'production'
+const controlled = process.env.CONTROLLED === "1";
 
-const cookies = process.env.COOKIES 
-  ? JSON.parse(process.env.COOKIES) 
+const headless = process.env.HEADLESS === "1";
+
+const production = process.env.NODE_ENV === "production";
+
+const cookies = process.env.COOKIES
+  ? JSON.parse(process.env.COOKIES)
   : production
-    ? {}
-    : process.argv[2]
-      ? { sessionid: process.argv[2] }
-      : {}
+  ? {}
+  : process.argv[2]
+  ? { sessionid: process.argv[2] }
+  : {};
 
-const dataDir = process.env.DATA_DIR || resolve(process.cwd(), 'account_data')
+const dataDir = process.env.DATA_DIR || resolve(process.cwd(), "account_data");
 
-const device = process.env.DEVICE || 'Pixel 2'
+const device = process.env.DEVICE || "Pixel 2";
 
 const getEnvData = () => ({
   login,
@@ -30,9 +37,10 @@ const getEnvData = () => ({
   production,
   cookies,
   dataDir,
-  device
-})
+  device,
+  screenshotDelay,
+});
 
-export default getEnvData
+export default getEnvData;
 
-console.log(getEnvData())
+console.log(getEnvData());

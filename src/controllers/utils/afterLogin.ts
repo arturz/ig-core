@@ -3,9 +3,6 @@ import log from "../../logs/log";
 import closeDialog from "../../services/dialog/closeDialog";
 import gotoIndex from "../../services/index/gotoIndex";
 import clickButton from "../../services/navigation/clickButton";
-import scrollToNextPost from "../../services/post/scrollToNextPost";
-import getFirstPost from "../../services/post/selectors/getFirstPost";
-import scrollTo from "../../utils/elements/scrollTo";
 import sleep from "../../utils/sleep";
 
 /*
@@ -32,10 +29,5 @@ export default async (page: Page) => {
 
   //do some random actions
   await gotoIndex(page);
-  await sleep(5000);
-  await scrollTo(await getFirstPost(page));
-  await sleep(1000, 2000);
-  await scrollToNextPost(page);
-  await sleep(1000, 2000);
-  await scrollToNextPost(page);
+  await sleep(2000);
 };

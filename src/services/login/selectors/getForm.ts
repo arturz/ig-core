@@ -1,9 +1,8 @@
-import { Page } from 'puppeteer'
+import { Page } from "puppeteer";
 
 export default async (page: Page) => {
-  const form = await page.$('form')
-  if(form === null)
-    throw `Nie można znaleźć formy z loginem i hasłem (przy logowaniu)`
+  const form = await page.$("form");
+  if (form === null) throw `There's no form to fill-in credentials`;
 
-  return form
-}
+  return form;
+};

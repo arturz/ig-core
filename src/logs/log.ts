@@ -1,13 +1,10 @@
-import { master, isSlave } from 'fork-with-emitter'
+import { host, isFork } from "fork-with-emitter";
 
-export default (type: string, payload?: any) => {
-  if(type === 'error')
-    console.error(type, payload)
-  else
-    console.log(type, payload)
+export default async (type: string, payload?: any) => {
+  if (type === "error") console.error(type, payload);
+  else console.log(type, payload);
 
-  if(!isSlave)
-    return
+  if (!isFork) return;
 
-  master.emit('log', { type, payload })
-}
+  await host.emit("log", { type, payload });
+};

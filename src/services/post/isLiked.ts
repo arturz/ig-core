@@ -1,11 +1,9 @@
-import LikeButton from '../../types/post/LikeButton'
+import LikeButton from "../../types/post/LikeButton";
 
 export default async (LikeButton: LikeButton) => {
-  if(await LikeButton.$('*[class*="filled"]') !== null)
-    return true
+  if ((await LikeButton.$('*[aria-label="Unlike" i]')) !== null) return true;
 
-  if(await LikeButton.$('*[class*="outline"]') !== null)
-    return false
+  if ((await LikeButton.$('*[aria-label="Like" i]')) !== null) return false;
 
-  throw `Nie można sprawdzić czy post jest polubiony (czy przycisk like wciśnięty)`
-}
+  throw `Cannot check if post was liked by you`;
+};

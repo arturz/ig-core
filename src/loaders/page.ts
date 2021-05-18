@@ -70,7 +70,6 @@ export default async () => {
 
   await page.reload();
 
-  //sometimes weird shit happens and page loads infinitely (but is usable)
   await page.evaluate(() => window.stop());
 
   return page;

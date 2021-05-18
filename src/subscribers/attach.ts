@@ -1,14 +1,14 @@
-import { Page } from 'puppeteer'
-import onFollow from './onFollow'
-import onLikePost from './onLikePost'
-import onLogin from './onLogin'
-import onFailedLogin from './onFailedLogin'
-import onMasterMessage from './onMasterMessage'
+import { Page } from "puppeteer";
+import onFailedLogin from "./onFailedLogin";
+import onFollow from "./onFollow";
+import onHostMessage from "./onHostMessage";
+import onLikePost from "./onLikePost";
+import onLogin from "./onLogin";
 
 export default (page: Page) => {
-  onFollow()
-  onLikePost()
-  onLogin()
-  onFailedLogin()
-  onMasterMessage(page)
-}
+  onFollow();
+  onLikePost();
+  onLogin();
+  onFailedLogin();
+  onHostMessage(page);
+};

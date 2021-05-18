@@ -1,4 +1,4 @@
-import { master } from "fork-with-emitter";
+import { host } from "fork-with-emitter";
 import { Page } from "puppeteer";
 import sleep from "sleep-promise";
 import { getGroupedCommands, runCommand } from "../commands";
@@ -18,15 +18,15 @@ const exit = async (page: Page) => {
 };
 
 export default (page: Page) => {
-  master.on("exit", exit);
+  host.on("exit", exit);
 
   const { startStreaming, stopStreaming } = createStreamingController(page);
-  master.on("startStreaming", startStreaming);
-  master.on("stopStreaming", stopStreaming);
+  host.on("startStreaming", startStreaming);
+  host.on("stopStreaming", stopStreaming);
 
-  master.onRequest("getCommands", async () => getGroupedCommands(page));
+  host.onRequest("getCommands", async () => getGroupedCommands(page));
 
-  master.onRequest(
+  host.onRequest(
     "executeCommand",
     async function ({ name, payload }: { name: string; payload: any }) {
       if (payload === undefined) log("executeCommand", `${name}()`);

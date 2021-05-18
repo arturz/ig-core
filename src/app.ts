@@ -1,20 +1,19 @@
-import { isSlave, master } from 'fork-with-emitter'
-import loadPage from './loaders/page'
-import loadSubscribers from './loaders/subscibers'
-import log from './logs/log'
+import { host, isFork } from "fork-with-emitter";
+import loadPage from "./loaders/page";
+import loadSubscribers from "./loaders/subscibers";
+import log from "./logs/log";
 
-process.on('unhandledRejection', err => {
-  log('error', err)
-  process.exit(1)
-})
+process.on("uncaughtExceptionMonitor", async (err) => {
+  log("error", err);
+});
 
 const starting = (async () => {
-  console.log('Loading page...')
-  const page = await loadPage()
-  console.log('Page loaded')
-  await loadSubscribers(page)
-})()
+  console.log("Loading page...");
+  const page = await loadPage();
+  console.log("Page loaded");
+  await loadSubscribers(page);
+})();
 
-if(isSlave){
-  master.onRequest('start', () => starting)
+if (isFork) {
+  host.onRequest("start", () => starting);
 }

@@ -1,8 +1,7 @@
-import { master, isSlave } from 'fork-with-emitter'
+import { host, isFork } from "fork-with-emitter";
 
 export default async (login: string) => {
-  if(!isSlave)
-    return false
+  if (!isFork) return false;
 
-  await master.request('isFollowed', login)
-}
+  await host.request("isFollowed", login);
+};

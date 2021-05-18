@@ -1,36 +1,35 @@
-import { Page } from 'puppeteer';
-import { master } from 'fork-with-emitter';
-import log from '../logs/log';
-import sleep from '../utils/sleep';
-import gotoIndex from '../services/index/gotoIndex';
-import unfollow from '../services/profile/unfollow';
+import { host } from "fork-with-emitter";
+import { Page } from "puppeteer";
+import log from "../logs/log";
+import gotoIndex from "../services/index/gotoIndex";
+import unfollow from "../services/profile/unfollow";
+import sleep from "../utils/sleep";
 
 export default async (page: Page, maximumUnfollows: number) => {
-  if(!maximumUnfollows)
-    throw `Missing maximumUnfollows`
+  if (!maximumUnfollows) throw `Missing maximumUnfollows`;
 
-  while(maximumUnfollows > 0){
-    const login = await master.request('oldestFollowed')
-    if(login === null){
-      log('unfollowingBot', 'login is null')
-      break
+  while (maximumUnfollows > 0) {
+    const login = await host.request("oldestFollowed");
+    if (login === null) {
+      log("unfollowingBot", "login is null");
+      break;
     }
 
-    await page.goto(`https://instagram.com/${login}`)
-    await sleep(2000, 4000)
+    await page.goto(`https://instagram.com/${login}`);
+    await sleep(2000, 4000);
     try {
-      await unfollow(page)
-    } catch(error) {
+      await unfollow(page);
+    } catch (error) {
       //user may changed login or was unfollowed manually
-      console.log(`Can't unfollow ${login}`)
+      console.log(`Can't unfollow ${login}`);
     } finally {
-      log('unfollowed', login)
+      log("unfollowed", login);
     }
 
-    await sleep(2000, 4000)
-    
+    await sleep(2000, 4000);
+
     maximumUnfollows--;
   }
 
-  await gotoIndex(page)
-}
+  await gotoIndex(page);
+};

@@ -4,7 +4,7 @@ import followingBot from "./controllers/followingBot";
 import login from "./controllers/login";
 import createDevtools from "./loaders/page/createDevtools";
 import closeDialog from "./services/dialog/closeDialog";
-//navigation
+import confirmDialog from "./services/dialog/confirmDialog";
 import gotoIndex from "./services/index/gotoIndex";
 import goBackFromLikedBy from "./services/likedBy/goBack";
 import gotoFollowing from "./services/myProfile/following/gotoFollowing";
@@ -15,25 +15,19 @@ import likePost from "./services/post/likePost";
 import scrollToNextPost from "./services/post/scrollToNextPost";
 import getVisiblePost from "./services/post/selectors/getVisiblePost";
 import unlikePost from "./services/post/unlikePost";
-import Credentials from "./types/Credentials";
-
-type Command = {
-  name: string;
-  title: string;
-  fn: (...args: any[]) => any;
-  arity: number;
-};
-
-type GroupedCommands = {
-  type: string;
-  commands: Command[];
-}[];
+import Command from "./types/Command";
+import GroupedCommands from "./types/GrouppedCommands";
 
 export const getGroupedCommands = (page: Page): GroupedCommands =>
   [
     {
       type: "Dialogs",
       commands: [
+        {
+          name: "confirmDialog",
+          title: "Confirm dialog",
+          fn: () => confirmDialog(page),
+        },
         {
           name: "closeDialog",
           title: "Close dialog",
@@ -86,7 +80,7 @@ export const getGroupedCommands = (page: Page): GroupedCommands =>
         },
         {
           name: "gotoLikedBy",
-          title: "Show people who liked",
+          title: "Show who liked",
           fn: async () => await gotoLikedBy(await getVisiblePost(page)),
         },
         {
@@ -102,7 +96,7 @@ export const getGroupedCommands = (page: Page): GroupedCommands =>
         {
           name: "login",
           title: "Sign in",
-          fn: (credentials?: Credentials) => login(page, credentials),
+          fn: () => login(page),
         },
         {
           name: "challenge",
@@ -116,7 +110,7 @@ export const getGroupedCommands = (page: Page): GroupedCommands =>
       commands: [
         {
           name: "followingBot",
-          title: "Follow new people",
+          title: "Follow x new people",
           fn: async (maximum: number) => await followingBot(page, maximum),
         },
       ],
@@ -126,16 +120,16 @@ export const getGroupedCommands = (page: Page): GroupedCommands =>
       commands: [
         {
           name: "throw",
-          title: "Throw given error message",
+          title: "Throw an error",
           fn: (error: string) => {
             if (!error) throw `test`;
 
-            throw `test "${error}"`;
+            throw error;
           },
         },
         {
           name: "createDevTools",
-          title: "Connect to phone's Chrome devtools",
+          title: "Open phone's devtools",
           fn: async () => await createDevtools(page),
         },
       ],
